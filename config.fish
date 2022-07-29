@@ -1,10 +1,10 @@
-
 ### Set's ###
 set fish_greeting
 set PATH $PATH /home/ghost/Coms
 set PATH $PATH /home/ghost/.rvm/bin
 set PATH $PATH /home/ghost/.local/bin
 set PATH $PATH /home/ghost/.pyenv/bin
+set PATH $PATH /var/lib/snapd/snap/bin
 
 ### Aliases ###
 alias ..="cd .."

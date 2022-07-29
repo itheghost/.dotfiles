@@ -20,8 +20,6 @@ alias update="sudo pacman -Syu"
 alias google="/bin/google-chrome-stable"
 alias msfc="/usr/bin/msfconsole"
 alias work="cd /home/ghost/Work/"
-alias code="cd /home/ghost/Work/Code\ Work/"
-alias hack="cd /home/ghost/Work/Hack\ Work/"
 
 
 if status --is-interactive

@@ -28,4 +28,6 @@ if status --is-interactive
 	end 
 end
 
-	
+### Needed for pyenv ###
+pyenv init - | source
+status --is-interactive; and source (pyenv virtualenv-init -|psub)

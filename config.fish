@@ -1,6 +1,6 @@
 ### Set's ###
 set fish_greeting
-set PATH $PATH /home/ghost/Coms
+set PATH $PATH /home/ghost/Work/Code\ Work/Coms
 set PATH $PATH /home/ghost/.rvm/bin
 set PATH $PATH /home/ghost/.local/bin
 set PATH $PATH /home/ghost/.pyenv/bin

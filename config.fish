@@ -4,7 +4,6 @@ set fish_greeting
 set PATH $PATH /home/ghost/Work/Code\ Work/Coms
 set PATH $PATH /home/ghost/.rvm/bin
 set PATH $PATH /home/ghost/.local/bin
-set PATH $PATH /home/ghost/.pyenv/bin
 set PATH $PATH /var/lib/snapd/snap/bin
 
 ### Aliases ###
@@ -19,6 +18,8 @@ alias update="sudo pacman -Syu"
 alias google="/bin/google-chrome-stable"
 alias msfc="/usr/bin/msfconsole"
 alias work="cd /home/ghost/Work/"
+
+[ -z "$SSH_AUTH_SOCK" ] && eval "$(ssh-agent -s)"
 
 
 if status --is-interactive

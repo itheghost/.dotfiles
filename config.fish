@@ -1,5 +1,4 @@
 ### Set's ###
-### Hey yo
 set fish_greeting
 set PATH $PATH /home/ghost/Work/Code\ Work/Coms
 set PATH $PATH /home/ghost/.rvm/bin

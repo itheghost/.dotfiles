@@ -27,17 +27,22 @@ set nobackup
 " Plugin's 
 call plug#begin()
 
-"Plug 'octol/vim-cpp-enhanced-highlight'
-"Plug 'vim-airline/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
-"Plug 'frazrepo/vim-rainbow'
-"Plug 'rafi/awesome-vim-colorschemes'
-"Plug 'arcticicestudio/nord.vim'
-"Plug 'preservim/tagbar'
-"Plug 'nvim-lua/plenary.nvim'
-"Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-"Plug 'nvim-telescope/telescope.nvim', {'tag': '0.1.0'}
-"Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+Plug 'gruvbox-community/gruvbox'
+Plug 'preservim/nerdtree'
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'frazrepo/vim-rainbow'
+Plug 'rafi/awesome-vim-colorschemes'
+Plug 'ThePrimeagen/vim-be-good'
+Plug 'dracula/vim',{'as': 'dracula'}
+Plug 'preservim/tagbar'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-telescope/telescope.nvim', {'tag': '0.1.0'}
+Plug 'github/copilot.vim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
@@ -78,7 +83,7 @@ let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 
 " Colorsheme 
-"colorscheme nord
+colorscheme nord
 hi Normal guibg=NONE ctermbg=NONE
 
 " Mapping's

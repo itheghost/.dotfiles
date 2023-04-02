@@ -6,7 +6,7 @@ local tnoremap = Utils.tnoremap
 vim.g.mapleader = ' '
 vim.g.localmapleader = ' '
 
-nnoremap("<leader>cnf", ":edit ~/.config/nvim/init.lua<CR>")
+nnoremap("<leader>cnf", ":e ~/.config/nvim/<CR>")
 
 nnoremap("<leader>ff", "<cmd>Telescope find_files<CR>")
 nnoremap("<leader>fg", "<cmd>Telescope live_grep<CR>")
@@ -19,6 +19,7 @@ nnoremap("<leader>vr3", ":vertical resize 30<CR>")
 nnoremap("<leader>5", ":vertical resize +5<CR>")
 nnoremap("<leader>-5", ":vertical resize -5<CR>")
 nnoremap("<leader>e", ":edit newfile<CR>")
+nnoremap("<leader>d", ":bdelete<CR>")
 nnoremap("<leader>ls", ":buffers<CR>")
 nnoremap("<leader>b", ":bnext<CR>")
 nnoremap("<leader>B", ":bprevious<CR>")

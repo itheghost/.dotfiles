@@ -23,6 +23,9 @@ o.writebackup = false
 g.mapleader = ' '
 g.maplocalleader = ' '
 
+g.loaded_netrw = 1
+g.loadednetrwPlugin = 1
+
 -- Rainbow brackets
 g.rainbow_active = 1
 

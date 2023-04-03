@@ -19,6 +19,9 @@ return require('packer').startup(function(use)
 	use{'nvim-telescope/telescope.nvim', {['tag'] = '1.1.0'}}
 	use{'nvim-telescope/telescope-fzf-native.nvim', {run = 'cmake -S. -Bbuild -DCMATE_BUILD_TYPE=Release && cmake --install build --prefix build'}}
 	use 'nvim-lualine/lualine.nvim'
+	use 'tpope/vim-fugitive'
+	use 'nvim-tree/nvim-tree.lua'
+	use 'nvim-tree/nvim-web-devicons'
 	use {
 		'VonHeikemen/lsp-zero.nvim',
 		branch = 'v2.x',

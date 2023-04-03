@@ -18,7 +18,8 @@ alias google="/bin/google-chrome-stable"
 alias msfc="/usr/bin/msfconsole"
 alias work="cd /home/ghost/Work/"
 
-[ -z "$SSH_AUTH_SOCK" ] && eval "$(ssh-agent -s)"
+#[ -z "$SSH_AUTH_SOCK" ] && eval "$(ssh-agent -s)"
+set SSH_AUTH_SOCK /tmp/ssh-XXXXXXwB5I4J/agent.766
 
 
 if status --is-interactive

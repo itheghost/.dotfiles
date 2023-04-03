@@ -1,8 +1,6 @@
 #!/bin/bash
 
 FLAG=$1
-FISH="$HOME/.config/fish"
-NVIM="$HOME/.config/nvim"
 
 function help {
 	echo "Usage: install.sh [option]"
@@ -13,33 +11,32 @@ function help {
 
 function link {
 	echo "[*] Linking files to .config.."
-	if [ -z "$(ls -A $NVIM)" && -z "$(ls -a $FISH)" ]; then
-		echo "[!] Files already exist! Remove files?[y/N] "
-		read -r REMOVE
-		if [ $REMOVE == 'y' || $REMOVE == 'Y']; then
-			rm $NVIM/* && rm $FISH/config.fish
-			ln -s $PWD/nvim $HOME/.config/nvim
-			ln -s $PWD/fish/config.fish $HOME/.config/fish/config.fish
-			echo "[*] Linking complete! Enjoy your setup"
-		else
-			echo"[!] Abort file link!"
-		fi
+	if [[ -d $HOME/.config  ]]; then
+		ln -s $PWD/nvim $HOME/.config/nvim
+		ln -s $PWD/fish $HOME/.config/fish
+		echo "[*] Linking done!"
+	else
+		echo "[!] .config does not exist! Creating.. "
+		mkdir $HOME/.config
+		ln -s $PWD/nvim $HOME/.config/nvim
+		ln -s $PWd/fish $HOME/.config/fish
+		echo "[*] Linking done!"
 	fi
 }
 
 function move {
 	echo "[*] Moving files to .config..."
-	if [ -z "$(ls -A $NVIM)" && -z "$(ls -A $FISH)" ]; then
-		echo "[!] $HOME/.config/ dirs are not empty! Replace files?[y/N] "
-		read -r REPLACE
-		if [ $REPLACE == 'y' || $REPLACE == 'Y' ]; then
-			mv fish $HOME/.config/fish
-			mv nvim $HOME/.config/nvim
-			echo "[*] Moving complete! Enjoy your setup"
-		else
-			echo "[!] Aborting file move!"
-		fi
+	if [[ -d $HOME/.config  ]]; then
+		mv nvim $HOME/.config/
+		mv fish $HOME/.config/
+		echo "[*] Moving done!"
+	else
+		mkdir $HOME/.config
+		mv nvim $HOME/.config/
+		mv fish $HOME/.config/
+		echo "[*] Moving done!"
 	fi
+
 }
 
 

@@ -7,6 +7,7 @@ vim.g.mapleader = ' '
 vim.g.localmapleader = ' '
 
 nnoremap("<leader>cnf", ":e ~/.config/nvim/<CR>")
+nnoremap("<leader>key", ":e ~/.config/nvim/lua/ghost/keymaps.lua<CR>")
 
 nnoremap("<leader>ff", "<cmd>Telescope find_files<CR>")
 nnoremap("<leader>fg", "<cmd>Telescope live_grep<CR>")

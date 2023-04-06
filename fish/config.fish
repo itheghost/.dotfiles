@@ -1,9 +1,10 @@
-### Set's ###
+# Set's ###
 set fish_greeting
-set PATH $PATH /home/ghost/Work/Code\ Work/Coms
-set PATH $PATH /home/ghost/.rvm/bin
+set PATH $PATH /home/ghost/Work/Code/Commands
 set PATH $PATH /home/ghost/.local/bin
 set PATH $PATH /var/lib/snapd/snap/bin
+set PATH $PATH /home/ghost/./rvm/bin
+set PATH $PATH /home/ghost/.local/share/gem/ruby/3.0.0/bin
 
 ### Aliases ###
 alias ..="cd .."
@@ -11,7 +12,6 @@ alias bye="shutdown now"
 alias la="ls -la"
 alias nv="nvim"
 alias pacman="sudo pacman"
-alias ping="ping -c 5"
 alias update="sudo pacman -Syu"
 
 alias google="/bin/google-chrome-stable"

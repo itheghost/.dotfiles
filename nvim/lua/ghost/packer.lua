@@ -13,6 +13,7 @@ return require('packer').startup(function(use)
 	--use 'frazrepo/vim-rainbow'
 	use 'rafi/awesome-vim-colorschemes'
 	use 'arcticicestudio/nord-vim'
+	use{'dracula/vim', { ['tag'] = 'dracula' }}
 	use 'preservim/tagbar'
 	use 'nvim-lua/plenary.nvim'
 	use{'nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'}}

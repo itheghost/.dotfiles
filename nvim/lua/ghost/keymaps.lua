@@ -21,7 +21,7 @@ nnoremap("<leader>gs", ":Git<CR>")
 nnoremap("<leader>ga", ":Git add .<CR>")
 nnoremap("<leader>gp", ":Git push<CR>")
 
-nnoremap("<leader>g", ":so %<CR>")
+nnoremap("<leader>h", ":so %<CR>")
 nnoremap("<leader>vr", ":vertical resize 25<CR>")
 nnoremap("<leader>vr3", ":vertical resize 30<CR>")
 nnoremap("<leader>5", ":vertical resize +5<CR>")

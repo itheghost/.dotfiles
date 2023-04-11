@@ -7,22 +7,30 @@ return require('packer').startup(function(use)
    -- Packer can manage itself
 	use 'wbthomason/packer.nvim'
 
+	-- Misc
 	use 'octol/vim-cpp-enhanced-highlight'
-	use 'vim-airline/vim-airline'
-	use 'vim-airline/vim-airline-themes'
-	--use 'frazrepo/vim-rainbow'
-	use 'rafi/awesome-vim-colorschemes'
-	use 'arcticicestudio/nord-vim'
+
+	-- Colorschemes
+	use 'rmehri01/onenord.nvim'
 	use{'dracula/vim', { ['tag'] = 'dracula' }}
+	use 'rafi/awesome-vim-colorschemes'
+	--use 'arcticicestudio/nord-vim' -- Required for vim-airline
+	use {
+		'nvim-lualine/lualine.nvim',
+		requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+	}
+
+	-- Plugins
 	use 'preservim/tagbar'
 	use 'nvim-lua/plenary.nvim'
 	use{'nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'}}
 	use{'nvim-telescope/telescope.nvim', {['tag'] = '1.1.0'}}
 	use{'nvim-telescope/telescope-fzf-native.nvim', {run = 'cmake -S. -Bbuild -DCMATE_BUILD_TYPE=Release && cmake --install build --prefix build'}}
-	use 'nvim-lualine/lualine.nvim'
 	use 'tpope/vim-fugitive'
 	use 'nvim-tree/nvim-tree.lua'
 	use 'nvim-tree/nvim-web-devicons'
+
+	-- Lsp
 	use {
 		'VonHeikemen/lsp-zero.nvim',
 		branch = 'v2.x',
@@ -43,5 +51,4 @@ return require('packer').startup(function(use)
 			{'L3MON4D3/LuaSnip'},     -- Required
 		}
 	}
---  use ''
 end)

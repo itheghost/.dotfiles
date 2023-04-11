@@ -96,10 +96,11 @@ local themes = {
     "steamburn",       -- 9
     "vertex",          -- 10
 	"pa-nord",		   -- 11	
-	"pa-dracula"	   -- 12
+	"pa-dracula",	   -- 12
+	"pa-custom",	   -- 13
 }
 
-local chosen_theme = themes[12]
+local chosen_theme = themes[13]
 local modkey       = "Mod4"
 local altkey       = "Mod1"
 local terminal     = "alacritty"

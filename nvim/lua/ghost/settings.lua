@@ -26,32 +26,3 @@ g.maplocalleader = ' '
 g.loaded_netrw = 1
 g.loadednetrwPlugin = 1
 
--- Rainbow brackets
-g.rainbow_active = 1
-
--- if g.airline_symbols == nil then
--- 	local g.airline_symbols = {}
--- end
-g.airline_powerline_fonts = 1
-g['airline#extensions#tabline#enabled'] = '1'
-g['airline#extensions#tabline#left_sep'] = ' '
-g['airline#extensions#tabline#left_alt_sep'] = '|'
-
--- Airline symobols
--- g.airline_left_sep = '»'
--- g.airline_left_sep = '»'
--- g.airline_left_sep = '▶'
--- g.airline_right_sep = '«'
--- g.airline_right_sep = '◀'
--- g.airline_symbols.linenr = '␤'
--- g.airline_symbols.branch = '⎇'
--- g.airline_symbols.paste = '∥'
--- g.airline_symbols.whitespace = 'Ξ'
-
--- g.airline_left_sep = ''
--- g.airline_left_alt_sep = ''
--- g.airline_right_sep = ''
--- g.airline_right_alt_sep = ''
--- g.airline_symbols.branch = ''
--- g.airline_symbols.readonly = ''
--- g.airline_symbols.linenr = ''

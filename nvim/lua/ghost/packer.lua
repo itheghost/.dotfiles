@@ -1,5 +1,3 @@
--- This file can be loaded by calling `lua require('plugins')` from your init.vim
-
 -- Only required if you have packer configured as `opt`
 vim.cmd [[packadd packer.nvim]]
 
@@ -14,7 +12,7 @@ return require('packer').startup(function(use)
 	use 'rmehri01/onenord.nvim'
 	use{'dracula/vim', { ['tag'] = 'dracula' }}
 	use 'rafi/awesome-vim-colorschemes'
-	--use 'arcticicestudio/nord-vim' -- Required for vim-airline
+	use {'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons'}
 	use {
 		'nvim-lualine/lualine.nvim',
 		requires = { 'nvim-tree/nvim-web-devicons', opt = true }

@@ -138,7 +138,7 @@ theme.volume = lain.widget.alsa({
 			volicon:set_image(theme.widget_vol)
 		end
 
-		widget:set_text(vlevel .. " % " )
+		widget:set_markup(markup.font(theme.font, vlevel .. " % " ))
 	end
 
 })

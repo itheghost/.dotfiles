@@ -98,9 +98,10 @@ local themes = {
 	"pa-nord",		   -- 11	
 	"pa-dracula",	   -- 12
 	"pa-custom",	   -- 13
+	"pa-rs5",		   -- 14
 }
 
-local chosen_theme = themes[13]
+local chosen_theme = themes[14]
 local modkey       = "Mod4"
 local altkey       = "Mod1"
 local terminal     = "alacritty"
@@ -275,7 +276,7 @@ globalkeys = mytable.join(
               {description = "destroy all notifications", group = "hotkeys"}),
     -- Take a screenshot
     -- https://github.com/lcpz/dots/blob/master/bin/screenshot
-    awful.key({ altkey }, "p", function() os.execute("maim ~/Pictures/$(date).png") end,
+    awful.key({ altkey }, "p", function() awful.spawn.with_shell("maim ~/Pictures/$(date).png") end,
               {description = "take a screenshot", group = "hotkeys"}),
 
     -- X screen locker

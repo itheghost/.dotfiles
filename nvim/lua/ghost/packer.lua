@@ -10,6 +10,7 @@ return require('packer').startup(function(use)
 
 	-- Colorschemes
 	use 'rmehri01/onenord.nvim'
+	use 'morhetz/gruvbox'
 	use{'dracula/vim', { ['tag'] = 'dracula' }}
 	use 'rafi/awesome-vim-colorschemes'
 	use {'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons'}

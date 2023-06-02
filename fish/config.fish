@@ -5,6 +5,7 @@ set PATH $PATH /home/ghost/.local/bin
 set PATH $PATH /var/lib/snapd/snap/bin
 set PATH $PATH /home/ghost/./rvm/bin
 set PATH $PATH /home/ghost/.local/share/gem/ruby/3.0.0/bin
+set -x PATH ~/.pyenv/bin $PATH
 
 ### Aliases ###
 alias ..="cd .."
@@ -33,5 +34,5 @@ if status --is-interactive
 end
 
 ### Needed for pyenv ###
-#pyenv init - | source
-#status --is-interactive; and source (pyenv virtualenv-init -|psub)
+pyenv init - | source
+status --is-interactive; and pyenv virtualenv-init - | source

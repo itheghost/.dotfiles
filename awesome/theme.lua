@@ -15,9 +15,9 @@ local math, string, os = math, string, os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 local theme                                     = {}
-theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/pa-nord"
-theme.wallpaper                                 = theme.dir .. "/wall.png"
-theme.font                                      = "Nerd Hack 10"
+theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/blackarch"
+--theme.wallpaper                                 = theme.dir .. "/wall.png"
+theme.font                                      = "FiraCode Nerd Font 10"
 theme.fg_normal                                 = "#FEFEFE"
 theme.fg_focus                                  = "#32D6FF"
 theme.fg_urgent                                 = "#C83F11"
@@ -42,6 +42,7 @@ theme.menu_submenu_icon                         = theme.dir .. "/icons/submenu.p
 theme.awesome_icon                              = theme.dir .. "/icons/awesome.png"
 theme.taglist_squares_sel                       = theme.dir .. "/icons/square_sel.png"
 theme.taglist_squares_unsel                     = theme.dir .. "/icons/square_unsel.png"
+theme.layout_centerwork							= theme.dir .. "/icons/centerwork.png"
 theme.layout_tile                               = theme.dir .. "/icons/tile.png"
 theme.layout_tileleft                           = theme.dir .. "/icons/tileleft.png"
 theme.layout_tilebottom                         = theme.dir .. "/icons/tilebottom.png"
@@ -102,7 +103,7 @@ local markup = lain.util.markup
 local separators = lain.util.separators
 
 -- Binary clock
-local binclock = require("themes.pa-nord.binclock"){
+local binclock = require("themes.pa-rs5.binclock"){
     height = dpi(16),
     show_seconds = true,
     color_active = theme.fg_normal,
@@ -152,49 +153,6 @@ lain.widget.contrib.task.attach(task, {
 })
 task:buttons(my_table.join(awful.button({}, 1, lain.widget.contrib.task.prompt)))
 
--- Scissors (xsel copy and paste)
---local scissors = wibox.widget.imagebox(theme.widget_scissors)
---scissors:buttons(my_table.join(awful.button({}, 1, function() awful.spawn.with_shell("xsel | xsel -i -b") end)))
-
--- Mail IMAP check
---[[ commented because it needs to be set before use
-local mailicon = wibox.widget.imagebox(theme.widget_mail)
-mailicon:buttons(my_table.join(awful.button({ }, 1, function () awful.spawn(mail) end)))
-theme.mail = lain.widget.imap({
-    timeout  = 180,
-    server   = "server",
-    mail     = "mail",
-    password = "keyring get mail",
-    settings = function()
-        if mailcount > 0 then
-            widget:set_text(" " .. mailcount .. " ")
-            mailicon:set_image(theme.widget_mail_on)
-        else
-            widget:set_text("")
-            mailicon:set_image(theme.widget_mail)
-        end
-    end
-})
---]]
-
--- ALSA volume
---local volicon = wibox.widget.imagebox(theme.widget_vol)
---local volume = lain.widget.pulsebar({
-   -- channel = "Master",
-    --notification_preset = { font = "Terminus 10", fg = theme.fg_normal },
-	--settings = function()
-     --   header = " Vol "
-     --   vlevel  = volume_now.level
-
-       -- if volume_now.status == "off" then
-        --    vlevel = vlevel .. "M "
-        --else
-         --   vlevel = vlevel .. " % "
-        --end
-
-       -- widget:set_markup(markup(gray, header) .. vlevel)
-    --end
---})
 
 -- MPD
 local musicplr = awful.util.terminal .. " -title Music -g 130x34-320+16 -e ncmpcpp"
@@ -266,7 +224,7 @@ local temp = lain.widget.temp({
 local tempicon = wibox.widget.imagebox(theme.widget_temp)
 
 -- / fs
-local fsicon = wibox.widget.imagebox(theme.widget_hdd)
+--local fsicon = wibox.widget.imagebox(theme.widget_hdd)
 --[[ commented because it needs Gio/Glib >= 2.54
 theme.fs = lain.widget.fs({
     notification_preset = { fg = theme.fg_normal, bg = theme.bg_normal, font = "Terminus 10" },
@@ -312,8 +270,8 @@ local net = lain.widget.net({
 -- Brigtness
 local brighticon = wibox.widget.imagebox(theme.widget_brightness)
 -- If you use xbacklight, comment the line with "light -G" and uncomment the line bellow
--- local brightwidget = awful.widget.watch('xbacklight -get', 0.1,
-local brightwidget = awful.widget.watch('light -G', 0.1,
+local brightwidget = awful.widget.watch('xbacklight -get', 0.1,
+--local brightwidget = awful.widget.watch('light -G', 0.1,
     function(widget, stdout, stderr, exitreason, exitcode)
         local brightness_level = tonumber(string.format("%.0f", stdout))
         widget:set_markup(markup.font(theme.font, " " .. brightness_level .. "%"))
@@ -386,6 +344,7 @@ function theme.at_screen_connect(s)
             layout = wibox.layout.fixed.horizontal,
             --spr,
             s.mytaglist,
+			wibox.container.background(wibox.container.margin(wibox.widget { brighticon, brightwidget, layout = wibox.layout.align.horizontal }, dpi(3), dpi(3)), theme.bg_focus),
             s.mypromptbox,
             spr,
         },
@@ -393,41 +352,26 @@ function theme.at_screen_connect(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             wibox.widget.systray(),
-            --wibox.container.margin(scissors, dpi(4), dpi(8)),
-            --[[ using shapes
-            pl(wibox.widget { mpdicon, theme.mpd.widget, layout = wibox.layout.align.horizontal }, "#343434"),
-            pl(task, "#343434"),
-            --pl(wibox.widget { mailicon, mail and theme.mail.widget, layout = wibox.layout.align.horizontal }, "#343434"),
-            pl(wibox.widget { memicon, mem.widget, layout = wibox.layout.align.horizontal }, "#777E76"),
-            pl(wibox.widget { cpuicon, cpu.widget, layout = wibox.layout.align.horizontal }, "#4B696D"),
-            pl(wibox.widget { tempicon, temp.widget, layout = wibox.layout.align.horizontal }, "#4B3B51"),
-            --pl(wibox.widget { fsicon, theme.fs and theme.fs.widget, layout = wibox.layout.align.horizontal }, "#CB755B"),
-            pl(wibox.widget { baticon, bat.widget, layout = wibox.layout.align.horizontal }, "#8DAA9A"),
-            pl(wibox.widget { neticon, net.widget, layout = wibox.layout.align.horizontal }, "#C0C0A2"),
-            pl(binclock.widget, "#777E76"),
-            --]]
             -- using separators
             --arrow(theme.bg_normal, "#343434"),
             --wibox.container.background(wibox.container.margin(wibox.widget { mailicon, theme.mail and theme.mail.widget, layout = wibox.layout.align.horizontal }, dpi(4), dpi(7)), "#343434"),
             --arrow("#5E81AC", theme.bg_normal),
             wibox.container.background(wibox.container.margin(wibox.widget { mpdicon, theme.mpd.widget, layout = wibox.layout.align.horizontal }, dpi(3), dpi(6)), theme.bg_focus),
-            arrow(theme.bg_normal, "#5E81AC"),
-            wibox.container.background(wibox.container.margin(task, dpi(3), dpi(7)), "#5E81AC"),
-            arrow("#5E81AC", "#81A1C1"),
-            wibox.container.background(wibox.container.margin(wibox.widget { memicon, mem.widget, layout = wibox.layout.align.horizontal }, dpi(2), dpi(3)), "#81A1C1"),
-            arrow("#81A1C1", "#88C0D0"),
-            wibox.container.background(wibox.container.margin(wibox.widget { cpuicon, cpu.widget, layout = wibox.layout.align.horizontal }, dpi(3), dpi(4)), "#88C0D0"),
-            arrow("#88C0D0", "#8FBCBB"),
-            wibox.container.background(wibox.container.margin(wibox.widget { tempicon, temp.widget, layout = wibox.layout.align.horizontal }, dpi(4), dpi(4)), "#8FBCBB"),
-            arrow("#8FBCBB", "#4C566A"),
-            wibox.container.background(wibox.container.margin(wibox.widget { volicon, theme.volume, layout = wibox.layout.align.horizontal }, dpi(3), dpi(3)), "#4C566A"),
-            arrow("#4C566A", "#434C5E"),
-            wibox.container.background(wibox.container.margin(wibox.widget { baticon, bat.widget, layout = wibox.layout.align.horizontal }, dpi(3), dpi(3)), "#434C5E"),
-            arrow("#434C5E", "#3B4252"),
-            wibox.container.background(wibox.container.margin(wibox.widget { nil, neticon, net.widget, layout = wibox.layout.align.horizontal }, dpi(3), dpi(3)), "#3B4252"),
-            arrow("#3B4253", "#2E3440"),
-            wibox.container.background(wibox.container.margin(binclock.widget, dpi(4), dpi(8)), "#2E3440"),
-            arrow("#2E3440", "alpha"),
+            arrow(theme.bg_normal, "#0d3264"),
+            wibox.container.background(wibox.container.margin(wibox.widget { memicon, mem.widget, layout = wibox.layout.align.horizontal }, dpi(2), dpi(3)), "#0d3264"),
+            arrow("#0d3264", "#0e458f"),
+            wibox.container.background(wibox.container.margin(wibox.widget { cpuicon, cpu.widget, layout = wibox.layout.align.horizontal }, dpi(3), dpi(4)), "#0e458f"),
+            arrow("#0e458f", "#6298e0"),
+            wibox.container.background(wibox.container.margin(wibox.widget { tempicon, temp.widget, layout = wibox.layout.align.horizontal }, dpi(4), dpi(4)), "#6298e0"),
+            arrow("#6298e0", "#4894ff"),
+            wibox.container.background(wibox.container.margin(wibox.widget { volicon, theme.volume, layout = wibox.layout.align.horizontal }, dpi(3), dpi(3)), "#4894ff"),
+            arrow("#4894ff", "#6298e0"),
+            wibox.container.background(wibox.container.margin(wibox.widget { baticon, bat.widget, layout = wibox.layout.align.horizontal }, dpi(3), dpi(3)), "#6298e0"),
+            arrow("#6298e0", "#0e458f"),
+            wibox.container.background(wibox.container.margin(wibox.widget { nil, neticon, net.widget, layout = wibox.layout.align.horizontal }, dpi(3), dpi(3)), "#0e458f"),
+            arrow("#0e458f", "#0d3264"),
+            wibox.container.background(wibox.container.margin(binclock.widget, dpi(4), dpi(8)), "#0d3264"),
+            arrow("#0d3264", "alpha"),
             --]]
             s.mylayoutbox,
         },

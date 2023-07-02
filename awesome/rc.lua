@@ -18,7 +18,7 @@ local wibox         = require("wibox")
 local beautiful     = require("beautiful")
 local naughty       = require("naughty")
 local lain          = require("lain")
---local menubar       = require("menubar")
+local menubar       = require("menubar")
 local freedesktop   = require("freedesktop")
 local hotkeys_popup = require("awful.hotkeys_popup")
                       require("awful.hotkeys_popup.keys")
@@ -95,33 +95,30 @@ local themes = {
     "rainbow",         -- 8
     "steamburn",       -- 9
     "vertex",          -- 10
-	"pa-nord",		   -- 11	
-	"pa-dracula",	   -- 12
-	"pa-custom",	   -- 13
-	"pa-rs5",		   -- 14
+	"blackarch",
 }
 
-local chosen_theme = themes[14]
-local modkey       = "Mod4"
-local altkey       = "Mod1"
-local terminal     = "alacritty"
+local chosen_theme = themes[11]
+local modkey       = "Mod1"
+local winkey       = "Mod4"
+local terminal     = "urxvtc"
 local vi_focus     = false -- vi-like client focus https://github.com/lcpz/awesome-copycats/issues/275
 local cycle_prev   = true  -- cycle with only the previously focused client or all https://github.com/lcpz/awesome-copycats/issues/274
 local editor       = os.getenv("EDITOR") or "nvim"
-local browser      = "google"
+local browser      = "firefox"
 
 awful.util.terminal = terminal
 awful.util.tagnames = { "1", "2", "3", "4", "5" }
 awful.layout.layouts = {
     awful.layout.suit.tile,
-    awful.layout.suit.tile.left,
-    awful.layout.suit.tile.bottom,
-    awful.layout.suit.tile.top,
+    --awful.layout.suit.tile.left,
+    --awful.layout.suit.tile.bottom,
+    --awful.layout.suit.tile.top,
     awful.layout.suit.floating,
-    --awful.layout.suit.spiral.dwindle,
+    awful.layout.suit.spiral.dwindle,
     --awful.layout.suit.fair,
-    --awful.layout.suit.fair.horizontal,
-    --awful.layout.suit.spiral,
+    awful.layout.suit.fair.horizontal,
+    awful.layout.suit.spiral,
     --awful.layout.suit.max,
     --awful.layout.suit.max.fullscreen,
     --awful.layout.suit.magnifier,
@@ -131,7 +128,7 @@ awful.layout.layouts = {
     --awful.layout.suit.corner.se,
     --lain.layout.cascade,
     --lain.layout.cascade.tile,
-    --lain.layout.centerwork,
+    lain.layout.centerwork,
     --lain.layout.centerwork.horizontal,
     --lain.layout.termfair,
     --lain.layout.termfair.center
@@ -192,16 +189,142 @@ local myawesomemenu = {
    { "Quit", function() awesome.quit() end },
 }
 
-awful.util.mymainmenu = freedesktop.menu.build {
-    before = {
-        { "Awesome", myawesomemenu, beautiful.awesome_icon },
-        -- other triads can be put here
-    },
-    after = {
-        { "Open terminal", terminal },
-        -- other triads can be put here
-    }
+local internet = {
+	{ "Firefox", "firefox" },
+	{ "Chromium", "chromium" },
+	{ "Wireshark", terminal .. " -e sh -c 'sudo wireshark'" },
 }
+
+local network = {
+	{ "Nmap", terminal .. " -e sh -c 'nmap ; fish'" },
+	{ "Wireshark", terminal .. " -e sh -c 'sudo wireshark'" },
+	{ "Torctl", terminal .. " -e sh -c 'torctl'" },
+	{ "Multimac", terminal .. " -e sh -c 'multimac'" },
+	{ "Arp-Scan", terminal .. " -e sh -c 'arp-scan'" },
+	{ "MacChanger", terminal .. " -e sh -c 'macchanger'" },
+	{ "NetSed", terminal .. " -e sh -c 'netsed'" },
+	{ "Ngrep", terminal .. " -e sh -c 'ngrep'" },
+	{ "Stunnel", terminal .. " -e sh -c 'stunnel'" },
+	{ "Sweaks", terminal .. " -e sh -c 'sweaks'" },
+	{ "TCPdump", terminal .. " -e sh -c 'tcpdump'" },
+	{ "TCPreplay", terminal .. " -e sh -c 'tcpreplay'" },
+	{ "UDPtunnel", terminal .. " -e sh -c 'udptunnel'" },
+}
+
+local crackers = {
+	{ "Hashcat", terminal .. " -e sh -c 'hashcat'" },
+	{ "Hydra", terminal .. " -e sh -c 'hydra'" },
+	{ "John", terminal .. " -e sh -c 'john'" },
+	{ "Ncrack", terminal .. " -e sh -c 'ncrack'" },
+	{ "Patator", terminal .. " -e sh -c 'patator'" },
+	{ "Pipal", terminal .. " -e sh -c 'pipal'" },
+}
+
+local crypto = {
+	{ "Argon2", terminal .. " -e sh -c 'argon2'" },
+	{ "Hashid", terminal .. " -e sh -c 'hashid'" },
+	{ "Hash-Identifier", terminal .. " -e sh -c 'hash-identifier'" },
+}
+
+local misc = {
+	{ "GDB", terminal .. " -e sh -c 'gdb'"},
+	{ "Binwalk", terminal .. " -e sh -c 'binwalk'"},
+	{ "Burp Suite", terminal .. " -e sh -c ''" },
+	{ "Wfuzz", terminal .. " -e sh -c 'wfuzz'" },
+	{ "DBD", terminal .. " -e sh -c 'dbd'" },
+	{ "SBD", terminal .. " -e sh -c 'sbd'" },
+	{ "MsfDB", terminal .. " -e sh -c 'msfdb'" },
+	{ "Winexe", terminal .. " -e sh -c 'winexe'" },
+	{ "Wordlistctl", terminal .. " -e sh -c 'wordlistctl'" },
+	{ "Radare2", terminal .. " -e sh -c 'radare2'" },
+}
+
+local forensic = {
+	{ "Chntpw", terminal .. " -e sh -c 'chntpw'" },
+	{ "DDRescue", terminal .. " -e sh -c 'ddrescue'" },
+	{ "MagicRescue", terminal .. " -e sh -c 'magicrescue'" },
+	{ "Maltego", terminal .. " -e sh -c 'maltego'" },
+	{ "Scalpel", terminal .. " -e sh -c 'scalpel'" },
+	{ "Testdisk", terminal .. " -e sh -c 'testdisk'" },
+}
+
+local proxy = {
+	{ "DNSSchef", terminal .. " -e sh -c 'dnsschef'" },
+	{ "MITMproxy", terminal .. " -e sh -c 'mitmproxy'" },
+	{ "Proxify", terminal .. " -e sh -c 'proxify'" },
+	{ "Redsocks", terminal .. " -e sh -c 'redsocks'" },
+}
+
+local recon = {
+	{ "Aquatone", terminal .. " -e sh -c 'aquatone'" },
+	{ "DNSenum", terminal .. " -e sh -c 'dnsenum'" },
+	{ "DNSrecon", terminal .. " -e sh -c 'dnsrecon'" },
+	{ "Enum4Linux", terminal .. " -e sh -c 'enum4linux'" },
+	{ "Fierce", terminal .. " -e sh -c 'fierce'" },
+	{ "FindDomain", terminal .. " -e sh -c 'finddomain'" },
+	{ "Legion", terminal .. " -e sh -c 'legion'" },
+	{ "NetDiscover", terminal .. " -e sh -c 'netdiscover'" },
+	{ "Netmask", terminal .. " -e sh -c 'netmask'" },
+	{ "Recon-ng", terminal .. " -e sh -c 'recon-ng'" },
+	{ "Spiderfoot", terminal .. " -e sh -c 'spiderfoot'" },
+	{ "Whatweb", terminal .. " -e sh -c 'whatweb'" },
+}
+
+local scanner = {
+	{ "Amass", terminal .. " -e sh -c 'amass'" },
+	{ "CrackMapExec", terminal .. " -e sh -c 'crackmapexec'" },
+	{ "Dirb", terminal .. " -e sh -c 'dirb'" },
+	{ "DirBuster", terminal .. " -e sh -c 'dirbuster'"},
+	{ "MasScan", terminal .. " -e sh -c 'masscan'" },
+	{ "Nikto", terminal .. " -e sh -c 'nikto'" },
+	{ "Netsniff-ng", terminal .. " -e sh -c 'netsniff-ng'" },
+	{ "Tcpik", terminal .. " -e sh -c 'tcpik'" },
+	{ "DirHunt", terminal .. " -e sh -c 'dirhunt'" },
+	{ "DirSearch", terminal .. " -e sh -c 'dirsearch'" },
+	{ "GoBuster", terminal .. " -e sh -c 'gobuster'" },
+	{ "Nuclei", terminal .. " -e sh -c 'nuclei'" },
+}
+
+local wireless = {
+	{ "Aircrack-ng", terminal .. " -e sh -c 'aircrack-ng'" },
+	{ "Bully", terminal .. " -e sh -c 'bully'" },
+	{ "Fern-Wifi-Cracker", terminal .. " -e sh -c 'fern-wifi-cracker'" },
+	{ "Reaver", terminal .. " -e sh -c 'reaver'" },
+	{ "Wifite", terminal .. " -e sh -c 'reaver'" },
+}
+
+
+local tools = {
+	{ "Network", network },
+	{ "Crackers", crackers },
+	{ "Crypto", crypto },
+	{ "Forensic", forensic },
+	{ "Proxy", proxy },
+	{ "Recon", recon },
+	{ "Scanner", scanner },
+	{ "Wireless", wireless },
+	{ "Misc", misc },
+}
+
+
+awful.util.mymainmenu = awful.menu.new(
+	{ items = {
+		{ "Awesome", myawesomemenu },
+		{ "Terminal", terminal },
+		{ "Internet", internet },
+		{ "Tools", tools },
+	}})
+
+--awful.util.mymainmenu = freedesktop.menu.build {
+--    before = {
+ --       { "Awesome", myawesomemenu, beautiful.awesome_icon },
+        -- other triads can be put here
+  --  },
+   -- after = {
+    --    { "Open terminal", terminal },
+        -- other triads can be put here
+    --}
+--}
 
 -- Hide the menu when the mouse leaves it
 --[[
@@ -280,7 +403,7 @@ globalkeys = mytable.join(
               {description = "take a screenshot", group = "hotkeys"}),
 
     -- X screen locker
-    awful.key({ altkey, "Control" }, "l", function () os.execute(xlock) end,
+    awful.key({ winkey, "Control" }, "l", function () os.execute(xlock) end,
               {description = "lock screen", group = "hotkeys"}),
 
     -- Show help
@@ -296,19 +419,19 @@ globalkeys = mytable.join(
               {description = "go back", group = "tag"}),
 
     -- Non-empty tag browsing
-    awful.key({ altkey }, "Left", function () lain.util.tag_view_nonempty(-1) end,
+    awful.key({ winkey }, "Left", function () lain.util.tag_view_nonempty(-1) end,
               {description = "view  previous nonempty", group = "tag"}),
-    awful.key({ altkey }, "Right", function () lain.util.tag_view_nonempty(1) end,
+    awful.key({ winkey }, "Right", function () lain.util.tag_view_nonempty(1) end,
               {description = "view  previous nonempty", group = "tag"}),
 
     -- Default client focus
-    awful.key({ altkey,           }, "j",
+    awful.key({ winkey,           }, "j",
         function ()
             awful.client.focus.byidx( 1)
         end,
         {description = "focus next by index", group = "client"}
     ),
-    awful.key({ altkey,           }, "k",
+    awful.key({ winkey,           }, "k",
         function ()
             awful.client.focus.byidx(-1)
         end,
@@ -381,9 +504,9 @@ globalkeys = mytable.join(
         {description = "toggle wibox", group = "awesome"}),
 
     -- On-the-fly useless gaps change
-    awful.key({ altkey, "Control" }, "+", function () lain.util.useless_gaps_resize(1) end,
+    awful.key({ winkey, "Control" }, "+", function () lain.util.useless_gaps_resize(1) end,
               {description = "increment useless gaps", group = "tag"}),
-    awful.key({ altkey, "Control" }, "-", function () lain.util.useless_gaps_resize(-1) end,
+    awful.key({ winkey, "Control" }, "-", function () lain.util.useless_gaps_resize(-1) end,
               {description = "decrement useless gaps", group = "tag"}),
 
     -- Dynamic tagging
@@ -406,9 +529,9 @@ globalkeys = mytable.join(
     awful.key({ modkey, "Shift"   }, "e", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
 
-    awful.key({ modkey, altkey    }, "l",     function () awful.tag.incmwfact( 0.05)          end,
+    awful.key({ modkey, winkey    }, "l",     function () awful.tag.incmwfact( 0.05)          end,
               {description = "increase master width factor", group = "layout"}),
-    awful.key({ modkey, altkey    }, "h",     function () awful.tag.incmwfact(-0.05)          end,
+    awful.key({ modkey, winkey    }, "h",     function () awful.tag.incmwfact(-0.05)          end,
               {description = "decrease master width factor", group = "layout"}),
     awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1, nil, true) end,
               {description = "increase the number of master clients", group = "layout"}),
@@ -436,11 +559,11 @@ globalkeys = mytable.join(
               {description = "dropdown application", group = "launcher"}),
 
     -- Widgets popups
-    awful.key({ altkey, }, "c", function () if beautiful.cal then beautiful.cal.show(7) end end,
+    awful.key({ winkey, }, "c", function () if beautiful.cal then beautiful.cal.show(7) end end,
               {description = "show calendar", group = "widgets"}),
-    --awful.key({ altkey, }, "h", function () if beautiful.fs then beautiful.fs.show(7) end end,
+    --awful.key({ winkey, }, "h", function () if beautiful.fs then beautiful.fs.show(7) end end,
       --        {description = "show filesystem", group = "widgets"}),
-    --awful.key({ altkey, }, "w", function () if beautiful.weather then beautiful.weather.show(7) end end,
+    --awful.key({ winkey, }, "w", function () if beautiful.weather then beautiful.weather.show(7) end end,
       --        {description = "show weather", group = "widgets"}),
 
     -- Screen brightness
@@ -468,13 +591,13 @@ globalkeys = mytable.join(
             beautiful.volume.update()
         end,
         {description = "toggle mute", group = "hotkeys"}),
-    awful.key({ altkey, "Control" }, "m",
+    awful.key({ winkey, "Control" }, "m",
         function ()
             os.execute(string.format("amixer -q set %s 100%%", beautiful.volume.channel))
             beautiful.volume.update()
         end,
         {description = "volume 100%", group = "hotkeys"}),
-    awful.key({ altkey, "Control" }, "0",
+    awful.key({ winkey, "Control" }, "0",
         function ()
             os.execute(string.format("amixer -q set %s 0%%", beautiful.volume.channel))
             beautiful.volume.update()
@@ -482,7 +605,7 @@ globalkeys = mytable.join(
         {description = "volume 0%", group = "hotkeys"}),
 
     -- MPD control
-	awful.key({altkey}, "r",
+	awful.key({winkey}, "r",
 		function ()
 			os.execute("mpc repeat")
 			os.execute("mpc random")
@@ -495,7 +618,7 @@ globalkeys = mytable.join(
             beautiful.mpd.update()
         end,
         {description = "mpc toggle", group = "widgets"}),
-    awful.key({ altkey }, "x",
+    awful.key({ winkey }, "x",
         function ()
             os.execute("mpc stop")
             beautiful.mpd.update()
@@ -513,7 +636,7 @@ globalkeys = mytable.join(
             beautiful.mpd.update()
         end,
         {description = "mpc next", group = "widgets"}),
-    awful.key({ altkey }, "0",
+    awful.key({ winkey }, "0",
         function ()
             local common = { text = "MPD widget ", position = "top_middle", timeout = 2 }
             if beautiful.mpd.timer.started then
@@ -528,7 +651,7 @@ globalkeys = mytable.join(
         {description = "mpc on/off", group = "widgets"}),
 
 	-- Taskwarrior
-	--awful.key({ altkey, "Control"}, "t",
+	--awful.key({ winkey, "Control"}, "t",
 	--	function () awful.screen.focused().mypromptbox:task() end,
 	--		{description = "task prompt", group = "widgets"}),
 
@@ -582,7 +705,7 @@ globalkeys = mytable.join(
 )
 
 clientkeys = mytable.join(
-    awful.key({ altkey, "Shift"   }, "m",      lain.util.magnify_client,
+    awful.key({ winkey, "Shift"   }, "m",      lain.util.magnify_client,
               {description = "magnify client", group = "client"}),
     awful.key({ modkey,           }, "f",
         function (c)
@@ -831,7 +954,7 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 awful.spawn.with_shell("picom")
 awful.spawn.with_shell("nitrogen --restore")
---awful.spawn.with_shell("variety")
+awful.spawn.with_shell("urxvtd -q &")
 awful.util.spawn("nm-applet")
 
 -- }}}

@@ -9,10 +9,11 @@ return require('packer').startup(function(use)
 	use 'octol/vim-cpp-enhanced-highlight'
 
 	-- Colorschemes
-	use 'rmehri01/onenord.nvim'
-	use 'morhetz/gruvbox'
-	use{'dracula/vim', { ['tag'] = 'dracula' }}
+	--use 'rmehri01/onenord.nvim'
+	--use 'morhetz/gruvbox'
+	--use{'dracula/vim', { ['tag'] = 'dracula' }}
 	use 'rafi/awesome-vim-colorschemes'
+	use { "catppuccin/nvim", as = "catppuccin" }
 	use {'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons'}
 	use {
 		'nvim-lualine/lualine.nvim',

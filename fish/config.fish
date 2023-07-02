@@ -3,7 +3,6 @@ set fish_greeting
 set PATH $PATH /home/ghost/Work/Code/Commands
 set PATH $PATH /home/ghost/.local/bin
 set PATH $PATH /var/lib/snapd/snap/bin
-set PATH $PATH /home/ghost/./rvm/bin
 set PATH $PATH /home/ghost/.local/share/gem/ruby/3.0.0/bin
 set -x PATH ~/.pyenv/bin $PATH
 
@@ -19,18 +18,10 @@ alias google="/bin/google-chrome-stable"
 alias msfc="/usr/bin/msfconsole"
 alias work="cd /home/ghost/Work/"
 
-#[ -z "$SSH_AUTH_SOCK" ] && eval "$(ssh-agent -s)"
-set SSH_AUTH_SOCK /tmp/ssh-XXXXXXwB5I4J/agent.766
-
-
 if status --is-interactive
 	if test -z "$DISPLAY" -a "$XDG_VTNR" = 1                                        
 			exec startx                                                                 
 	end 
-
-	# Set colors in tty 
-	~/.config/fish/themes/nord.fish
-
 end
 
 ### Needed for pyenv ###

@@ -1,0 +1,51 @@
+!--- Sets ---!
+URxvt.geometry: 400x400
+URxvt.scrollBar: False
+!URxvt.fading: 65
+ 
+!--- Font ---!
+!Xft.dpi: 82
+!URxvt.lineSpace: 1
+!URxvt.letterSpaces: 1
+!URxvt.font: xft:Hack Nerd Font Mono:pixelsize=15:size=10
+*.font: xft:Hack Nerd Font:style=Regular:size=10,xft:DejaVuSansM Nerd Font:style=Regular:size=10,xft:FiraCode Nerd Font:style=Regular:size=9
+
+!--- Extensions ---!
+URxvt.perl-ext-common: default,matcher,selection-to-clipboard
+URxvt.url-launcher: /usr/bin/xdg-open
+URxvt.matcher.button: 1
+URxvt.clipboard.autocopy: true
+URxvt.keysym.M-c: perl:clipboard:copy
+URxvt.keysym.M-v: perl:clipboard:paste
+
+
+
+!--- Colors ---!
+URxvt.background: rgba:0000/0000/0200/c800
+URxvt.depth: 32
+URxvt.foreground: #ffffff
+
+! Black + DarkGrey
+*color0:  #000000
+*color8:  #808080
+! DarkRed + Red
+*color1:  #fe0100
+*color9:  #fe0100
+! DarkGreen + Green
+*color2:  #33ff00
+*color10: #33ff00
+! DarkYellow + Yellow
+*color3:  #feff00
+*color11: #feff00
+! DarkBlue + Blue
+*color4:  #0066ff
+*color12: #0066ff
+! DarkMagenta + Magenta
+*color5:  #cc00ff
+*color13: #cc00ff
+! DarkCyan + Cyan
+*color6:  #00ffff
+*color14: #00ffff
+! LightGrey + White
+*color7:  #d0d0d0
+*color15: #ffffff
